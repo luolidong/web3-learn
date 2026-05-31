@@ -69,19 +69,21 @@ def main():
     print(f"使用昵称: {nickname}")
     print("-" * 60)
 
-    try:
-        # 第一阶段：找到4个0开头的哈希值
-        result_4zeros = pow_calculator(nickname, 4, max_attempts_4zeros)
+    # 第一阶段：找到4个0开头的哈希值
+    result_4zeros = pow_calculator(nickname, 4, max_attempts_4zeros)
 
-        if result_4zeros:
+    if result_4zeros:
+        # 第二阶段：找到5个0开头的哈希值
+        result_5zeros = pow_calculator(nickname, 5, max_attempts_5zeros)
 
-            # 第二阶段：找到5个0开头的哈希值
-            result_5zeros = pow_calculator(nickname, 5, max_attempts_5zeros)
+        if result_4zeros and result_5zeros:
+            print("结果对比:")
+            print(f"{'=' * 60}")
+            print(f"4个0开头:")
+            print(f"  尝试次数: {result_4zeros['attempts']:,} 次")
+            print(f"  耗时: {result_4zeros['time']:.4f} 秒")
+            print(f"  Nonce: {result_4zeros['nonce']}")
 
-            if result_4zeros and result_5zeros:
-                print("结果对比:")
-                print(f"{'=' * 60}")
-                print(f"4个0开头:")
-                print(f"  尝试次数: {result_4zeros['attempts']:,} 次")
-                print(f"  耗时: {result_4zeros['time']:.4f} 秒")
-                print(f"  Nonce: {result_4zeros['nonce']}")
+
+if __name__ == "__main__":
+    main()
